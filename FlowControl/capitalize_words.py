@@ -1,4 +1,4 @@
-word = input('Please write a word:\n ')
+word = input('Please write a word:\n')
 
 def capitalize(word):
     new_word = ''

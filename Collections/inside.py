@@ -1,9 +1,9 @@
 
 def print_items(lists):
     if 3 in lists:
-        print(f'3 is in {lists}')
+        print(True) 
     else:
-        print(f'3 is not in {lists}')
+        print(False)
 
 numbers1 = [1, 3, 5, 7, 9, 11]
 numbers2 = []

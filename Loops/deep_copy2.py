@@ -4,13 +4,7 @@ dict1 = {
     'b': ({3, 2}, ['bb', 'bbb']),
 }
 
-dict2 = dict1.copy()
-dict2['a'] = dict1['a'].copy()
-dict2['a'][0] = dict1['a'][0].copy()
-dict2['a'][1] = dict1['a'][1].copy()
-dict2['b'] = list(dict1['b']).copy()
-dict2['b'][0] = dict1['b'][0].copy()
-dict2['b'][1] = dict1['b'][1].copy()
+dict2 = dict(dict1)
 
 print(dict1         is dict2)
 print(dict1['a']    is dict2['a'])

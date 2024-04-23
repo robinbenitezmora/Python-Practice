@@ -1,26 +1,26 @@
 greet = input('Enter your language in order to greet you:\n')
 
-def greet_match(greet):
-    match greet:
+def greet_match(greet_languge):
+    match greet_languge:
         case 'en':
-            print('Hi!')
+            return f'Hello!'
         case 'fr':
-            print('Salut!')
+            return f'Salut!'
         case 'pt':
-            print('Olá!')
+            return f'Ola!'
         case 'de':
-            print('Hallo!')
+            return f'Hallo!'
         case 'sv':
-            print('Hej!')
+            return f'Hej!'
         case 'es':
-            print('Hola!')
+            return f'Hola!'
         case 'it':
-            print('Ciao!')
+            return f'Ciao!'
         case 'nl':
-            print('Hallo!')
+            return f'Hallo!'
         case 'ru':
-            print('Privet!')
+            return f'Privet!'
         case _ :
-            print('Sorry, I do not speak that language.')
+            return f'I\'m sorry, I don\'t know that language.'
 
 greet_match(greet)

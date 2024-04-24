@@ -5,8 +5,7 @@ grocery_list = ['paprika', 'tofu', 'garlic', 'quinoa',
 def print_grocery_list(grocery_list):
     for item in grocery_list:
         print (item)
-        grocery_list.index(item)
-    return grocery_list
+grocery_list.pop(0)
 
 
 print(print_grocery_list(grocery_list))

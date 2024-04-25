@@ -8,4 +8,4 @@ car['automatic'] = True
 car['year'] = 2003
 del car['mileage']
 
-print(car)
+print(car['color'])

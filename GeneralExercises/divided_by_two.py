@@ -2,8 +2,8 @@
 numbers = {
     'high':   100,
     'medium': 50,
-    'low':    25,
+    'low':    10,
 }
 
-half_numbers = [number // 2 for number in numbers.values()]
-print(half_numbers)
+for key, value in numbers.items():
+    print(f'A {key} number is {value}.')

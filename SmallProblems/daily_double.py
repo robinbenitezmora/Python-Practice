@@ -3,7 +3,6 @@
 def crunch(string):
     result = ''
     for i in string:
-        print(result[-1:])
         if i == result[-1:]:
             continue
         else:

@@ -1,4 +1,4 @@
-
+# Write a function that returns True if the string passed as an argument is a palindrome, False otherwise. A palindrome reads the same forwards and backwards. For this problem, the case matters and all characters matter.
 
 def palindrome(string):
     for i in range(len(string) // 2):

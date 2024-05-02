@@ -1,4 +1,4 @@
-
+# Write a program that solicits six (6) numbers from the user and prints a message that describes whether the sixth number appears among the first five.
 
 num1 = int(input('Enter the first number:\n'))
 num2 = int(input('Enter the second number:\n'))

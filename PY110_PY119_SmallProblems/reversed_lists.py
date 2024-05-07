@@ -1,4 +1,6 @@
+'''Write a function that takes a list as an argument and reverses its elements in place. That is, mutate the list passed into this function. The return value should be the same list object.
 
+You may not use the built-in reverse() method.'''
 
 def reverse_list(lst):
     new_lst = lst[::-1]

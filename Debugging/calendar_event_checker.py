@@ -1,4 +1,4 @@
-
+# We have a list of events, and we want to check if a specific date is available (i.e., no events planned for that day). However, the function always seems to think the date is available, even when it's not.
 
 events = {
     "2023-08-13": ["Python debugging exercises"],

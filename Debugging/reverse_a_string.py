@@ -1,8 +1,7 @@
 # You have a function that should reverse a given string. However, it's not producing the expected output.
 
 def reverse_string(s):
-    for char in s:
-        return s[::-1]
+    return s[::-1]
 
 print(reverse_string('hello')) # Expected output: 'olleh
 print(reverse_string('world')) # Expected output: 'dlrow'

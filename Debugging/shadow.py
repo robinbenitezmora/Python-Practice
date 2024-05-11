@@ -1,4 +1,4 @@
-# We want to create a function that appends a given value to a list. However, the function seems to be behaving unexpectedly
+# We defined a function intending to multiply the sum of numbers by a factor. However, the function raises an error. Why? How would you fix this code?
 
 def sum(numbers, factor):
     total = 0

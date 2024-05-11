@@ -1,4 +1,4 @@
-# We have a list of lists and want to make a copy of it. After making the copy, we modify the original list, but the copied list also seems to be affected:
+# We want to create a function that appends a given value to a list. However, the function seems to be behaving unexpectedly
 
 def sum(numbers, factor):
     total = 0

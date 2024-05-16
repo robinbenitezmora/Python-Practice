@@ -79,6 +79,21 @@ class Principal:
         self.combobox1.current(0)
         self.combobox1.place(x=380, y=190)
 
+        # Select Antiquity
+        self.l_antiquity = Label(self.window, text='Select the Antiquity:')
+        self.l_antiquity.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white')
+        self.l_antiquity.place(x=380, y=240)
+
+        self.var_combo2 = StringVar()
+        self.op_combo2 = (' ', '1 year', '2 to 6 years', 'more than 7 years')
+        self.combobox2 = ttk.Combobox(self.window, state='readonly', values=self.op_combo2, textvariable=self.var_combo2, width=25, font=('Andale Mono Regular', 11, 'bold'))
+        self.combobox2.current(0)
+        self.combobox2.place(x=380, y=270)
+
+
+
+
+
 
 
 

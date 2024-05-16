@@ -39,6 +39,12 @@ class License:
         self.check_accept = Checkbutton(self.window, text='I Accept', font=('Arial', 12, 'bold'))
         self.check_accept.place(x=10, y=260)
 
+        # Buttons
+        self.continuing = Button(self.window, text='Accept', font=('Arial', 11, 'bold'), width=7, height=2, bd=3, state=DISABLED)
+        self.continuing.place(x=10, y=290)
+        self.cancel = Button(self.window, text='Cancel', font=('Arial', 11, 'bold'), width=7, height=2, bd=3)
+        self.cancel.place(x=100, y=290)
+
         self.window.mainloop()
 
 License()

@@ -9,6 +9,9 @@ class License:
         self.window.configure(bg='white')
         self.window.iconbitmap(r'C:\Users\Robin\PYTHON PROJECTS\Launch_School\Python-Practice\Vacations\icon0.ico')
 
+        self.background = PhotoImage(file = r'C:\Users\Robin\PYTHON PROJECTS\Launch_School\Python-Practice\Vacations\coca-cola-l.png')
+        Label(self.window, image=self.background, bg='white').place(x=300, y=220)
+
         # Labels
         self.label1 = Label(self.window, text='TERMS AND CONDITIONS')
         self.label1.config(font=('Arial', 13, 'bold'), bg='white', fg='black')
@@ -29,6 +32,7 @@ class License:
     SI USTED NO ACEPTA ESTOS TERMINOS, HAGA CLIC EN (NO ACEPTO) Y NO UTILICE ESTE SOFTWARE."
          ''')
         self.conditions_text.place(x=10, y=40)
+        self.conditions_text.config(state=DISABLED)
 
         self.window.mainloop()
 

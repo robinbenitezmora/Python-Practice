@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 
 class Principal:
     def __init__(self):
@@ -66,6 +67,20 @@ class Principal:
         self.e_last_name = Entry(self.window, textvariable=self.data_last_name, bd=2, bg='#eee8e8', fg='red')
         self.e_last_name.config(font=('Andale Mono Regular', 12, 'bold'), width=27)
         self.e_last_name.place(x=60, y=350)
+
+        # Select Department
+        self.l_department = Label(self.window, text='Select the Department:')
+        self.l_department.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white')
+        self.l_department.place(x=380, y=160)
+
+        self.var_combo1 = StringVar()
+        self.op_combo = (' ', 'Customer Attention', 'Logistic Departmente', 'Management Department')
+        self.combobox1 = ttk.Combobox(self.window, state='readonly', values=self.op_combo, textvariable=self.var_combo1, width=25, font=('Andale Mono Regular', 11, 'bold'))
+        self.combobox1.current(0)
+        self.combobox1.place(x=380, y=190)
+
+
+
 
         self.window.mainloop()
 

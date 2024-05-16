@@ -34,6 +34,11 @@ class License:
         self.conditions_text.place(x=10, y=40)
         self.conditions_text.config(state=DISABLED)
 
+        # Checkbuttons
+        self.accept = IntVar()
+        self.check_accept = Checkbutton(self.window, text='I Accept', font=('Arial', 12, 'bold'))
+        self.check_accept.place(x=10, y=260)
+
         self.window.mainloop()
 
 License()

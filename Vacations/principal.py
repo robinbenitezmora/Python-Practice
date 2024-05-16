@@ -20,6 +20,11 @@ class Principal:
         self.menubar1.add_cascade(label='About of..', menu=self.options2)
         self.options2.add_command(label='Info', font=('Arial', 10, 'bold'))
 
+        # Logo Image
+        self.background = PhotoImage(file = r'C:\Users\Robin\PYTHON PROJECTS\Launch_School\Python-Practice\Vacations\coca-cola-p.png')
+        Label(self.window, image=self.background, bg='red').place(x=0, y=0)
+
+
         self.window.mainloop()
 
 Principal()

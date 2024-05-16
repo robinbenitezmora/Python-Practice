@@ -24,6 +24,14 @@ class Principal:
         self.background = PhotoImage(file = r'C:\Users\Robin\PYTHON PROJECTS\Launch_School\Python-Practice\Vacations\coca-cola-p.png')
         Label(self.window, image=self.background, bg='red').place(x=0, y=0)
 
+        # Labels
+        self.l_welcome = Label(self.window, text='Welcome!')
+        self.l_welcome.config(font=('Andale Mono Regular', 20, 'bold'), bg='red', fg='white')
+        self.l_welcome.place(x=380, y=35)
+
+        self.l_detail = Label(self.window, text='Data of the worker for the Vacations Calcule')
+        self.l_detail.config(font=('Andale Mono Regular', 18, 'bold'), bg='red', fg='white')
+        self.l_detail.place(x=60, y=110)
 
         self.window.mainloop()
 

@@ -90,6 +90,12 @@ class Principal:
         self.combobox2.current(0)
         self.combobox2.place(x=380, y=270)
 
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure('TCombobox', background='red')
+
+
+
 
 
 

@@ -9,6 +9,27 @@ class License:
         self.window.configure(bg='white')
         self.window.iconbitmap(r'C:\Users\Robin\PYTHON PROJECTS\Launch_School\Python-Practice\Vacations\icon0.ico')
 
+        # Labels
+        self.label1 = Label(self.window, text='TERMS AND CONDITIONS')
+        self.label1.config(font=('Arial', 13, 'bold'), bg='white', fg='black')
+        self.label1.place(x=180, y=10)
+
+        self.conditions_text = Text(self.window, width=96, height=12)
+        self.conditions_text.configure(font=('Arial', 8), bg='white', state=NORMAL)
+        self.conditions_text.insert(INSERT, '''       
+    TÉRMINOS Y CONDICIONES"
+
+    A.  PROHIBIDA SU VENTA O DISTRIBUCIÓN SIN AUTORIZACIÓN DE INFORMATICONFIG.
+    B.  PROHIBIDA LA ALTERACIÓN DEL CÓDIGO FUENTE O DISEÑO DE LAS INTERFACES GRÁFICAS.
+    C.  INFORMATICONFIG DE ERNESTO NO SE HACE RESPONSABLE DEL MAL USO DE ESTE SOFTWARE.
+
+    LOS ACUERDOS LEGALES EXPUESTOS A CONTINUACION RIGEN EL USO QUE USTED HAGA DE ESTE SOFTWARE
+    (INFORMATICONFIG), NO SE RESPONSABILIZA DEL USO QUE USTED"
+    HAGA CON ESTE SOFTWARE Y SUS SERVICIOS. PARA ACEPTAR ESTOS TERMINOS HAGA CLIC EN (ACEPTO)"
+    SI USTED NO ACEPTA ESTOS TERMINOS, HAGA CLIC EN (NO ACEPTO) Y NO UTILICE ESTE SOFTWARE."
+         ''')
+        self.conditions_text.place(x=10, y=40)
+
         self.window.mainloop()
 
 License()

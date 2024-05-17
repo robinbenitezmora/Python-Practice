@@ -94,6 +94,17 @@ class Principal:
         style.theme_use('clam')
         style.configure('TCombobox', background='red')
 
+        # Result Label
+        self.l_result = Label(self.window, text='Result of the Calcule:')
+        self.l_result.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white')
+        self.l_result.place(x=380, y=320)
+
+        # Text Result
+        self.text_result = Text(self.window, width=27, height=7)
+        self.text_result.config(font=('Andale Mono Regular', 11, 'bold'), bg='#eee8e8', fg='red', state=DISABLED)
+        self.text_result.place(x=380, y=350)
+
+
 
 
 

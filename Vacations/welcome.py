@@ -21,7 +21,7 @@ class Welcome:
         self.label2.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white')
         self.label2.place(x=50, y=220)
 
-        self.label3 = Label(self.window, text='©2022 The Coca-Cola Company.')
+        self.label3 = Label(self.window, text='©2024 The Coca-Cola Company.')
         self.label3.config(font=('Andale Mono Regular', 10, 'bold'), bg='red', fg='white')
         self.label3.place(x=70, y=400)
 

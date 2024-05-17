@@ -104,13 +104,19 @@ class Principal:
         self.text_result.config(font=('Andale Mono Regular', 11, 'bold'), bg='#eee8e8', fg='red', state=DISABLED)
         self.text_result.place(x=380, y=350)
 
+        # Label footer
+        self.l_footer = Label(self.window, text='©2024 The Coca-Cola Company.')
+        self.l_footer.config(font=('Andale Mono Regular', 10, 'bold'), bg='red', fg='white')
+        self.l_footer.place(x=200, y=485)
 
+        # Buttons
+        self.b_calculate = Button(self.window, text='Calculate', width=10, height=2)
+        self.b_calculate.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white', bd=5)
+        self.b_calculate.place(x=190, y=420)
 
-
-
-
-
-
+        self.b_clear = Button(self.window, text='Clear', width=10, height=2)
+        self.b_clear.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white', bd=5)
+        self.b_clear.place(x=60, y=420)
 
 
 

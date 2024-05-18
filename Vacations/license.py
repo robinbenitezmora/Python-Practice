@@ -1,4 +1,6 @@
 from tkinter import *
+from principal import Principal
+import sys
 
 class License:
     def __init__(self):
@@ -36,17 +38,31 @@ class License:
 
         # Checkbuttons
         self.accept = IntVar()
-        self.check_accept = Checkbutton(self.window, text='I Accept', font=('Arial', 12, 'bold'))
+        self.check_accept = Checkbutton(self.window, text='I Accept', font=('Arial', 12, 'bold'), command=self.accept)
         self.check_accept.place(x=10, y=260)
 
         # Buttons
-        self.continuing = Button(self.window, text='Accept', font=('Arial', 11, 'bold'), width=7, height=2, bd=3, state=DISABLED)
+        self.continuing = Button(self.window, text='Accept', font=('Arial', 11, 'bold'), width=7, height=2, bd=3, state=DISABLED, command=self.access)
         self.continuing.place(x=10, y=290)
-        self.cancel = Button(self.window, text='Cancel', font=('Arial', 11, 'bold'), width=7, height=2, bd=3)
+        self.cancel = Button(self.window, text='Cancel', font=('Arial', 11, 'bold'), width=7, height=2, bd=3, command=self.cancel)
         self.cancel.place(x=100, y=290)
 
         self.window.mainloop()
 
-License()
+    def accept(self):
+        if (self.continuing['state'] == DISABLED):
+            self.continuing['state'] = NORMAL
+        else:
+            self.continuing['state'] = DISABLED
+
+    def access(self):
+        self.window.destroy()
+        Principal()
+
+    def cancel(self):
+        sys.exit()
+
+
+
 
 

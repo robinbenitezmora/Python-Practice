@@ -204,3 +204,5 @@ class Principal:
         self.e_last_name.delete("0", "end")
         self.combobox1.current(0)
         self.combobox2.current(0)
+
+Principal()

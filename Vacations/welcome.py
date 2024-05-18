@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+from license import License
 
 class Welcome:
     def __init__(self):
@@ -33,11 +35,20 @@ class Welcome:
 
         # Button
         self.button1 = Button(self.window, text='Entry', bd=2, bg='white', fg='red')
-        self.button1.config(font=('Andale Mono Regular', 14,), width=12)
+        self.button1.config(font=('Andale Mono Regular', 14,), width=12, command=self.access)
         self.button1.place(x=100, y=290)
 
         self.window.mainloop()
 
-Welcome()
+    def access(self):
+        self.long = self.data1.get()
+        if not self.data1.get():
+            messagebox.showerror('ATTENTION', 'YOU MUST WRITE THE USER NAME!')
+        elif 0 < len(self.long) < 8:
+            messagebox.showerror('ATTENTION', 'THE USER NAME MUST HAVE MORE THAN 8 CHARACTERS')
+        else:
+            self.window.destroy()
+            License()
 
-
+if __name__=='__main__':
+    execute = Welcome()

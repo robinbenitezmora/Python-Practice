@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
+import sys
 
 class Principal:
     def __init__(self):
@@ -16,10 +18,10 @@ class Principal:
         self.options1 = Menu(self.menubar1, tearoff=0)
         self.options2 = Menu(self.menubar1, tearoff=0)
         self.menubar1.add_cascade(label='Options', menu=self.options1)
-        self.options1.add_command(label='Exit', font=('Arial', 10, 'bold'))
+        self.options1.add_command(label='Exit', command=self.exit, font=('Arial', 10, 'bold'))
 
         self.menubar1.add_cascade(label='About of..', menu=self.options2)
-        self.options2.add_command(label='Info', font=('Arial', 10, 'bold'))
+        self.options2.add_command(label='Info', command=self.about, font=('Arial', 10, 'bold'))
 
         # Logo Image
         self.background = PhotoImage(file = r'C:\Users\Robin\PYTHON PROJECTS\Launch_School\Python-Practice\Vacations\coca-cola-p.png')
@@ -74,7 +76,7 @@ class Principal:
         self.l_department.place(x=380, y=160)
 
         self.var_combo1 = StringVar()
-        self.op_combo = (' ', 'Customer Attention', 'Logistic Departmente', 'Management Department')
+        self.op_combo = (' ', 'Customer Attention', 'Logistic Department', 'Management Department')
         self.combobox1 = ttk.Combobox(self.window, state='readonly', values=self.op_combo, textvariable=self.var_combo1, width=25, font=('Andale Mono Regular', 11, 'bold'))
         self.combobox1.current(0)
         self.combobox1.place(x=380, y=190)
@@ -110,16 +112,95 @@ class Principal:
         self.l_footer.place(x=200, y=485)
 
         # Buttons
-        self.b_calculate = Button(self.window, text='Calculate', width=10, height=2)
+        self.b_calculate = Button(self.window, text='Calculate', width=10, height=2, command=self.data_control)
         self.b_calculate.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white', bd=5)
         self.b_calculate.place(x=190, y=420)
 
-        self.b_clear = Button(self.window, text='Clear', width=10, height=2)
+        self.b_clear = Button(self.window, text='Clear', width=10, height=2, command=self.data_clean)
         self.b_clear.config(font=('Andale Mono Regular', 12, 'bold'), bg='red', fg='white', bd=5)
         self.b_clear.place(x=60, y=420)
 
-
-
         self.window.mainloop()
 
-Principal()
+    def data_control(self):
+        if not self.data_name.get() or not self.data_first_name.get() or not self.data_last_name.get() or self.var_combo1.get == ' ' or self.var_combo2.get() == ' ':
+            messagebox.showerror('ATTENTION', 'YOU MUST FILL ALL THE DATA!')
+        if len(self.data_name.get()) > 12 or len(self.data_first_name.get()) > 15 or len(self.data_last_name.get()) >15:
+            messagebox.showerror('ATTENTION', 'THE DATA IS TOO LONG!')
+        else:
+            self.text_result.config(state=NORMAL)
+            self.text_result.delete("1.0", "end")
+            if self.var_combo1.get() == 'Customer Attention':
+                if self.var_combo2.get() == '1 year':
+                    self.text_result.insert(INSERT,
+                                            self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + '\n Department: ' + self.var_combo1.get() + '\n Antiquity: ' + self.var_combo2.get() + '\n\n GET 14 VACATION DAYS')
+                if self.var_combo2.get() == '2 to 6 years':
+                    self.text_result.insert(INSERT,
+                                            self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                            '\n Departament: ' + self.var_combo1.get() + \
+                                            '\n Antiquity: ' + self.var_combo2.get() + \
+                                            '\n\n GET 18 VACATION DAYS')
+                if self.var_combo2.get() == 'more than 7 years':
+                    self.text_result.insert(INSERT,
+                                            self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                            '\n Departament: ' + self.var_combo1.get() + \
+                                            '\n Antiquity: ' + self.var_combo2.get() + \
+                                            '\n\n GET 22 VACATION DAYS')
+                if self.var_combo1.get() == 'Logistic Department':
+                    if self.var_combo2.get() == '1 year':
+                        self.text_result.insert(INSERT,
+                                                self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                                '\n Departament: ' + self.var_combo1.get() + \
+                                                '\n Antiquity: ' + self.var_combo2.get() + \
+                                                '\n\n GET 10 VACATION DAYS')
+                    if self.var_combo2.get() == '2 to 6 years':
+                        self.text_result.insert(INSERT,
+                                                self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                                '\n Departament: ' + self.var_combo1.get() + \
+                                                '\n Antiquity: ' + self.var_combo2.get() + \
+                                                '\n\n GET 15 VACATION DAYS')
+                    if self.var_combo2.get() == 'more than 7 years':
+                        self.text_result.insert(INSERT,
+                                                self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                                '\n Departament: ' + self.var_combo1.get() + \
+                                                '\n Antiquity: ' + self.var_combo2.get() + \
+                                                '\n\n GET 20 VACATION DAYS')
+                if self.var_combo1.get() == 'Management Department':
+                    if self.var_combo2.get() == '1 year':
+                        self.text_result.insert(INSERT,
+                                                self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                                '\n Departament: ' + self.var_combo1.get() + \
+                                                '\n Antiquity: ' + self.var_combo2.get() + \
+                                                '\n\n GET 18 VACATION DAYS')
+                    if self.var_combo2.get() == '2 to 6 years':
+                        self.text_result.insert(INSERT,
+                                                self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                                '\n Departament: ' + self.var_combo1.get() + \
+                                                '\n Antiquity: ' + self.var_combo2.get() + \
+                                                '\n\n GET 25 VACATION DAYS')
+                    if self.var_combo2.get() == 'more than 7 years':
+                        self.text_result.insert(INSERT,
+                                                self.data_name.get() + ' ' + self.data_first_name.get() + ' ' + self.data_last_name.get() + \
+                                                '\n Departament: ' + self.var_combo1.get() + \
+                                                '\n Antiquity: ' + self.var_combo2.get() + \
+                                                '\n\n GET 30 VACATION DAYS')
+                self.text_result.config(state=DISABLED)
+
+    def about(self):
+        messagebox.showinfo('Info', '''        VACATION CONTROL SYSTEM
+        Developed by: ROBIN BENITEZ MORA
+        All Rights Reserved 2024
+        ''')
+
+    def exit(self):
+        sys.exit()
+
+    def data_clean(self):
+        self.text_result.config(state=NORMAL)
+        self.text_result.delete("1.0", "end")
+        self.text_result.config(state=DISABLED)
+        self.e_name.delete("0", "end")
+        self.e_first_name.delete("0", "end")
+        self.e_last_name.delete("0", "end")
+        self.combobox1.current(0)
+        self.combobox2.current(0)

@@ -1,8 +1,10 @@
 # Import the psycopg2 module
+
 import psycopg2
 
 connection=psycopg2.connect(user='postgres',
                             password='peti2020#',
+                            host='127.0.0.1',
                             port='5432',
                             database='db_persons'
                             )

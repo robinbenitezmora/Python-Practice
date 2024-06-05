@@ -1,0 +1,11 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Users{% endblock %}
+{% block body_title %}Users of the System{% endblock %}
+{% block main_content %}
+<div class=" accordion" id="accordionUser">
+    {% for user_list in object_list %}
+    {% include 'accounts/user-card.html' %}
+    {% endfor %}
+</div>
+{% include 'base/_pagination.html' %}
+{% endblock %}

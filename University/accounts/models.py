@@ -8,56 +8,49 @@ Models for User Account
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
-class CustomUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
-        if not email:
-            raise ValueError('The Email must be set')
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields, username=email)
+    def _create_user(self, username, password, **extra_fields):
+        if not username:
+            raise ValueError('The given username must be set')
+        user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_superuser', True)
-        return self._create_user(email, password, **extra_fields)
+    def create_user(self, username, password=None, **extra_fields):
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(username, password, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, username, password, **extra_fields):
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_staff', True)
 
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+            raise ValueError('Superuser must have is_staff=True.')
 
-        return self._create_user(email, password, **extra_fields)
+        return self._create_user(username, password, **extra_fields)
 
 class CustomUser(AbstractUser):
 
     DEPARTMENT_CHOICES = (
-        ('IT', 'Information Technology'),
-        ('HR', 'Human Resources'),
-        ('AC', 'Accounting'),
-        ('SA', 'Sales'),
-        ('MA', 'Marketing'),
-        ('PR', 'Production'),
-        ('LO', 'Logistics'),
-        ('PU', 'Purchasing'),
+        ('AD', 'Administration'),
+        ('FI', 'Finance'),
+        ('SE', 'Secretary'),
+        ('TE', 'Teacher'),
+        ('ST', 'Student'),
+        ('PA', 'Parent')
     )
 
-    email = models.EmailField('Email', unique=True)
-    is_staff = models.BooleanField('Staff Status', default=True)
-    department = models.CharField(
-        'Department',
-         max_length=2,
-         choices=DEPARTMENT_CHOICES
-    )
+    is_staff = models.BooleanField('Team member', default=True)
+    department = models.CharField('Department', max_length=2, choices=DEPARTMENT_CHOICES, default='ST')
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'department']
+    class Meta:
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+        ordering = ['first_name']
 
     def __str__(self):
-        return self.email
+        return self.username
 
-    objects = CustomUserManager()
+    objects = UserManager()

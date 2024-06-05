@@ -1,0 +1,44 @@
+{% extends 'webpage/_base_index.html' %}
+{% block title %}Login{% endblock %}
+{% block body_content %}
+{# {% include 'base/_messages.html' %}#}
+<div class="container bg-light container-login">
+    <h1 class="mb-4">{% block body_title %}Login{% endblock %}</h1>
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.non_field_errors }}
+    </div>
+    {% endif %}
+    <form class="form-signin form-group" method="POST" autocomplete="off" id="form-login">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="username">User</label>
+                <input type="text" id="username" name="username" class="form-control"
+                    value="{{ request.POST.username }}" maxlength="30" required autofocus>
+                <p class="errorlist">{{ form.errors.username }}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+                <p class="errorlist">{{ form.errors.password }}</p>
+            </div>
+        </div>
+        <div class="form-row mt-4">
+            <div class="form-group col">
+                <button class="btn btn-dark-blue mr-2" type="submit">Enter</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- Footer -->
+{% include 'webpage/_base_footer.html' %}
+<!-- Copyright -->
+<div id="copyright">
+    <div class="container">
+        <a href="">ROBIN BENITEZ</a>
+    </div>
+</div>
+{% endblock %}

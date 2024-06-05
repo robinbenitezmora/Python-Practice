@@ -1,63 +1,60 @@
+from django.shortcuts import redirect, reverse
+from django.urls import reverse_lazy
+from django.contrib import messages
+
 from django.contrib.messages.views import SuccessMessageMixin
+
 from accounts.forms import CustomUserCreateForm, CustomUserChangeForm
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from accounts.models import CustomUser
+from base.base_admin_permissions import BaseAdminUsersAdSe
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 from django.contrib.auth.views import (
-    PasswordChangeView,
-    PasswordResetView,
-    PasswordResetConfirmView,
-    PasswordResetCompleteView
+    LoginView,
 )
 
-class UserCreate(SuccessMessageMixin, CreateView):
+class UserLogin(SuccessMessageMixin, LoginView):
+    template_name = 'accounts/login.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse('index-manager'))
+        return super().get(request, *args, **kwargs)
+
+class UserCreate(BaseAdminUsersAdSe, CreateView):
     model = CustomUser
     form_class = CustomUserCreateForm
-    template_name = 'accounts/user-new.html'
-    success_url = 'accounts/login/'
-    success_message = 'Welcome! Log in to get started'
+    template_name = 'accounts/user_new.html'
+    success_url = reverse_lazy('index-manager')
+    success_message = "User created successfully"
 
-class UserChange(SuccessMessageMixin, UpdateView):
+class UserChange(BaseAdminUsersAdSe, UpdateView):
     model = CustomUser
     form_class = CustomUserChangeForm
     template_name = 'accounts/user-change.html'
-    success_url = '/'
-    success_message = 'Your profile has been successfully changed'
+    success_url = reverse_lazy('users')
+    success_message = "User updated successfully"
 
-    def get_queryset(self):
-
-        if self.request.user.is_authenticated:
-            return self.model.objects.filter(username=self.request.user)
-        else:
-            return super().get_queryset().filter(username=None)
-
-class UserDelete(SuccessMessageMixin, DeleteView):
+class UserDelete(BaseAdminUsersAdSe, DeleteView):
     model = CustomUser
     template_name = 'accounts/user-delete.html'
-    success_url = '/'
-    success_message = 'Your profile has been successfully deleted'
+    success_url = reverse_lazy('users')
+    success_message = "User deleted successfully"
+
+    def get_success_url(self):
+        '''
+        Only necessary for display success message after delete
+        '''
+        messages.success(self.request, self.success_message)
+
+        return reverse('users')
+
+class UserListView(BaseAdminUsersAdSe, ListView):
+    model = CustomUser
+    template_name = 'accounts/users.html'
+    context_object_name = 'users'
+    paginate_by = 10
 
     def get_queryset(self):
-
-        if self.request.user.is_authenticated:
-            return self.model.objects.filter(username=self.request.user)
-        else:
-            return super().get_queryset().filter(username=None)
-
-class PasswordChange(SuccessMessageMixin, PasswordChangeView):
-    template_name = 'accounts/password-change.html'
-    success_url = '/'
-    success_message = 'Your password has been successfully changed'
-
-class PasswordReset(SuccessMessageMixin, PasswordResetView):
-    template_name = 'accounts/password-reset.html'
-    success_url = '/'
-    success_message = 'A password reset link has been sent to your email'
-
-class PasswordResetConfirm(SuccessMessageMixin, PasswordResetConfirmView):
-    template_name = 'accounts/password_reset_confirm.html'
-    success_message = 'Your password has been successfully reset'
-
-class PasswordResetComplete(SuccessMessageMixin, PasswordResetCompleteView):
-    template_name = 'accounts/password_reset_complete.html'
-    success_url = '/'
-    success_message = 'Your password has been changed correctly. Log in to get started'
+        return CustomUser.objects.all().order_by('first_name')

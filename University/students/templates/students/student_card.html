@@ -1,0 +1,63 @@
+<div class="container container-card-min">
+    <div class="row head-card-min">
+        <div class="col-md-5 d-flex align-items-center">
+            <a class="a-card-min" data-toggle="collapse" href="#a{{ student.pk }}" role="button" aria-expanded="false"
+                aria-controls="a{{ student.pk }}">
+                {{ student.student_name }}
+                <span data-feather="chevron-down"></span>
+            </a>
+        </div>
+        <div class="col-md-1 d-flex align-items-center">
+            Age: {{ student.student_age }}
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-end">
+            {% for class in classes %}
+            {% if class.3 == student.pk %}
+            {{ class.0 }} {{ class.2 }}
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-2 d-flex justify-content-end">
+            <a class="button-card-min" href="{% url 'student-change' student.pk %}">Ver</a>
+            <a class="ml-2 button-card-min" href="{% url 'student-change' student.pk %}">change</a>
+        </div>
+    </div>
+    <!-- Area Collapse -->
+    <div class="collapse pt-3" id="a{{ student.pk }}" data-parent="#accordionstudent">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Age: {{ student.student_age }}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Date of birth: {{ student.student_date_birth }}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Telephone: {{ student.student_ddd }} - {{ student.student_telephone }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Membership 1: {{ student.student_branch1_name }}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Kinship: {{ student.student_branch1_kinship }}</p>
+            </div>
+            <div class="col-md-4">
+                <p>telephones: {{ student.student_branch1_ddd1 }} - {{ student.student_branch1_telephone1 }} | {{
+                    student.student_branch1_ddd2 }} - {{ student.student_branch1_telephone2 }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Memebership 2: {{ student.student_branch2_name }}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Kinship: {{ student.student_branch2_kinship }}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Telephones: {{ student.student_branch2_ddd1 }} - {{ student.student_branch2_telephone1 }} | {{
+                    student.student_branch2_ddd2 }} - {{ student.student_branch2_telephone2 }}</p>
+            </div>
+        </div>
+    </div>
+</div>

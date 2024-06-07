@@ -1,0 +1,11 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Students{% endblock %}
+{% block body_title %}Students{% endblock %}
+{% block main_content %}
+<div class="accordion" id="accordionStudent">
+ {% for student in object_list %}
+ {% include 'students/student_card.html' %}
+ {% endfor %}
+</div>
+{% include 'base/_pagination.html' %}
+{% endblock %}

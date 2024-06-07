@@ -28,7 +28,7 @@ def validate_alpha(value):
     else:
         return value
 
-def validate_data_nasc(value):
+def validate_data_birth(value):
     '''
     Validate if value is a valid date
     '''
@@ -82,7 +82,7 @@ def validate_cpf(value):
                     else:
                         return value
 
-def validate_born_certified(value):
+def validate_birth_certified(value):
     '''
     Validate if value is a valid Born Certified
     '''

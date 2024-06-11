@@ -12,32 +12,39 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from django.contrib.messages import constants
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ----------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '************************ secret key ****************************'
+SECRET_KEY = config('SECRET_KEY')
 
 # ----------------------------------------------------------------------------
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # ----------------------------------------------------------------------------
-ALLOWED_HOSTS = []
+# --- Development --- #
+if DEBUG:
+    ALLOWED_HOSTS = []
+
+# --- Production --- #
+if not DEBUG:
+    ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
 
 # ----------------------------------------------------------------------------
-# --- Necessary in production for Debug Tolbar --- #
-# See INSTALLED_APPS --> Django Apps Extras and MIDDLEWARE
-INTERNAL_IPS = ['127.0.0.1']
+# SSL and Cookies
+# ---- Production ---- #
+if not DEBUG:
+    ADMINS = [(config('SUPER_USER'), config('EMAIL'))]
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = [config('TRUSTED_ORIGINS')]
 
-# ----------------------------------------------------------------------------
-# ----- Production ----- #
-# SECURE_SSL_REDIRECT = True
-# ADMINS = [('domain_name', 'email@domain_name.com')]
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+    if DEBUG:
+        INTERNAL_IPS = ['127.0.0.1']
 
 # ----------------------------------------------------------------------------
 # Application definition
@@ -55,7 +62,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # --- Django Apps Extras --- #
-    'debug_toolbar',
 
     # --- My Apps --- #
     'administration',
@@ -70,6 +76,9 @@ INSTALLED_APPS = [
     'webpage',
 ]
 
+if DEBUG:
+    INSTALLED_APPS.append['debug_toolbar']
+
 # ----------------------------------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +91,9 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
+if DEBUG:
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
 # ----------------------------------------------------------------------------
 ROOT_URLCONF = 'schoolManagement.urls'
 
@@ -89,7 +101,7 @@ ROOT_URLCONF = 'schoolManagement.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,6 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'base.context_global.templates_global_context',
             ],
         },
     },
@@ -109,12 +122,12 @@ WSGI_APPLICATION = 'schoolManagement.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 # --- Development SQLite3 --- #
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#   'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 # --- Development PostgreSQL --- #
 # DATABASES = {
@@ -139,6 +152,32 @@ DATABASES = {
 #         'PORT': '5432',
 #     }
 # }
+
+# --- PostgreSQL in Heroku --- #
+# --- Development --- #
+
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('NAME_DB'),
+            'USER': config('USER_DB'),
+            'PASSWORD': config('PASSWORD_DB'),
+            'HOST': config('HOST_DB'),
+            'PORT': config('PORT_DB'),
+        }
+    }
+
+# --- Production --- #
+if not DEBUG:
+    import dj_database_url
+
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
 
 # ----------------------------------------------------------------------------
 # Password validation
@@ -177,32 +216,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# --- Production --- #
-# STATIC_URL = '/static/'
-# STATIC_ROOT = '/home/domain_name/www/static'abs
-
-# MEDIA URL = 'media/'
-# MEDIA_ROOT = '/home/domain_name/www/media'
+STATIC_URL = '/static/'
+MEDIA_URL = 'media/'
 
 # --- Development --- #
-STATIC_URL = '/static/'
-STATICFILES_ROOT = BASE_DIR / 'static'
+if DEBUG:
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# --- Production --- #
+if not DEBUG:
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
 # ----------------------------------------------------------------------------
 # --- Email --- #
 # --- Development --- #
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# --- Production --- #
-# EMAIL_HOST = 'smtp.domain_name.com'
-# EMAIL_HOST_USER = 'email@domain_name.com'
-# EMAIL_PORT = 587
-# EMAIL_USER_SSL = True
-# EMAIL_HOST_PASSWORD = 'email_password'
-# DEFAULT_FROM_EMAIL = 'email@domain_name.com'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ----------------------------------------------------------------------------
 # --- Custom User Model --- #
@@ -210,15 +241,16 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # ----------------------------------------------------------------------------
 # --- Login Logout User --- #
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index_manager'
 LOGOUT_REDIRECT_URL = 'index'
 
 # ----------------------------------------------------------------------------
 # --- Messages --- #
 MESSAGE_TAGS = {
-    constants.DEBUG: 'alert-info',
-    constants.INFO: 'alert-info',
-    constants.SUCCESS: 'alert-success',
-    constants.WARNING: 'alert-warning',
-    constants.ERROR: 'alert-danger',
+    constants.DEBUG: 'alert_info',
+    constants.INFO: 'alert_info',
+    constants.SUCCESS: 'alert_success',
+    constants.WARNING: 'alert_warning',
+    constants.ERROR: 'alert_danger',
 }

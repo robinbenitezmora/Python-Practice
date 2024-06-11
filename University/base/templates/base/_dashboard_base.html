@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'base/_head.html' %}
+</head>
+
+<body>
+    <!-- NavBar -->
+    {% if user.department == 'se' or user.department == 'ad' %}
+    {% include 'base/_dashboard_navbar_search.html' %}
+    {% else %}
+    {% include 'base/_dashboard_navbar_simple.html' %}
+    {% endif %}
+    <!-- Body -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- SideBar -->
+            {% include 'base/_sidebar_'|add:user.department|add:'.html' %}
+            <!-- Main -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h3 class="h3">{% block body_title %}{% endblock %}</h3>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Btn 01</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Btn 02</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar"></span>
+                            Tasks
+                        </button>
+                    </div>
+                </div>
+                <!-- Main Messages -->
+                {% include 'base/_messages.html' %}
+                <!-- Main Content -->
+                {% block main_content %}
+                <div class="container mt-4">
+                    <h3>System still under development.</h3>
+                    <p>Use the 'Students, Teachers, School Year and System Users' sections to test how it works.</p>
+                </div>
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+    <!-- Scripts js -->
+    {% include 'base/_scripts_js.html' %}
+</body>
+
+</html>

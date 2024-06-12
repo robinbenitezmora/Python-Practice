@@ -1,7 +1,4 @@
 from django.contrib import admin
-from principal.models import LectiveYear, BasicStage, SchoolYear
-from principal.forms import LectiveYearForm, BasicStageForm
+from principal.models import Discipline
 
-admin.site.register(LectiveYear)
-admin.site.register(BasicStage)
-admin.site.register(SchoolYear)
+admin.site.register(Discipline)

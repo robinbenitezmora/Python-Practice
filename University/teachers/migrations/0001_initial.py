@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
                 name='Teacher',
                 fields=[
                     ('teacher_id', models.AutoField(primary_key=True, serialize=False)),
-                    ('teacher_status', models.CharField(choices=[('0', 'Competitive'), ('1', 'CLT'), ('2', 'Temporary'), ('3', 'Substitute'), ('4', 'Trainee'), ('5', 'Outsourced'), ('6', 'Curriculum'), ('7', 'Certificate'), ('8', 'Fired')], max_length=1, verbose_name='Teacher status'))]
+                    ('teacher_status', models.CharField(choices=[('0', 'Competitive'), ('1', 'CLT'), ('2', 'Temporary'), ('3', 'Substitute'), ('4', 'Trainee'), ('5', 'Outsourced'), ('6', 'Curriculum'), ('7', 'Certificate'), ('8', 'Fired')], max_length=1, verbose_name='Teacher status')),
                     ('teacher_inep',  models.CharField(blank=True, max_length=12, null=True, unique=True, validators=[base.validators.validate_teacher_inep, base.validators.validate_digits], verbose_name='Inep')),
                     ('teacher_cpf', models.CharField(blank=True, max_length=14, null=True, unique=True, validators=[base.validators.validate_cpf], verbose_name='Cpf')),
                 ('teacher_rg', models.CharField(blank=True, max_length=20, null=True, unique=True, verbose_name='RG')),
@@ -126,12 +126,12 @@ class Migration(migrations.Migration):
                 ('teacher_course2', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='teachercourse2', to='base.coursefs', verbose_name='course Higher Education')),
                 ('teacher_course3', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='teachercourse3', to='base.coursefs', verbose_name='course Higher Education')),
                 ('teacher_pais_birth', models.ForeignKey(default='Colombia', on_delete=django.db.models.deletion.DO_NOTHING, related_name='teacherpaisbirth', to='base.country', verbose_name='Birth Country')),
-                ('teacher_residence_country', models.ForeignKey(default='Colombia', on_delete=django.db.models.deletion.DO_NOTHING, related_name='teacherpaisresidence', to='base.country', verbose_name='Country')),
+                ('teacher_residence_country', models.ForeignKey(default='Colombia', on_delete=django.db.models.deletion.DO_NOTHING, related_name='teacherpaisresidence', to='base.country', verbose_name='Country'))
             ],
             options={
                 'verbose_name': 'Teacher',
-                'verbose_name_plural': 'Teacheres',
-                'ordering': ['teacher_name'],
+                'verbose_name_plural': 'Teachers',
             },
         ),
     ]
+        

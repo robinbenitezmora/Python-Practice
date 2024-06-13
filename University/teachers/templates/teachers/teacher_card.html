@@ -1,0 +1,20 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Delete Teacher(a){% endblock %}
+{% block body_title %}Delete Teacher(a){% endblock %}
+{% block main_content %}
+<div class="container bg-light back02">
+    <h2>{{ object.teacher_name }}</h2>
+    <p>
+        Are you sure you want to delete all information about this teacher from the database?
+        <br>
+        All data will be removed.
+    </p>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <button type="submit" class="btn button-del px-4 shadow-lg mr-2">Yes</button>
+            <a class="btn btn-dark-blue px-4 shadow-lg" onclick="history.back();">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

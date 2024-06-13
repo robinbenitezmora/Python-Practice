@@ -1,0 +1,15 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Search results{% endblock %}
+{% block body_title %}Search results - {{ request.GET.term }}{% endblock %}
+<!-- Main -->
+{% block main_content %}
+{% if object_list %}
+<div class=" accordion" id="accordionStudent">
+    {% for student in object_list %}
+    {% include 'students/student_card.html' %}
+    {% endfor %}
+</div>
+{% else %}
+<h4>The search for "{{ request.GET.term }}", did not return any results</h4>
+{% endif %}
+{% endblock %}

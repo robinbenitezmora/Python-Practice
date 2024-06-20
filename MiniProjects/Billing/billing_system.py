@@ -239,51 +239,195 @@ class Bill_App:
         # ============== totalBill =================
 
     def total(self):
-        self.total_medical_price = (self.sanitizer.get() * 50 +
-                                    self.mask.get() * 40 +
-                                    self.hand_gloves.get() * 30 +
-                                    self.dettol.get() * 120 +
-                                    self.newsprin.get() * 20 +
-                                    self.thermal.get() * 150)
+        self.m_h_g_p = self.hand_gloves.get()*12
+        self.m_s_p = self.sanitizer.get()*2
+        self.m_m_p = self.mask.get()*5
+        self.m_d_p = self.dettol.get()*30
+        self.m_n_p = self.newsprin.get()*5
+        self.m_t_g_p = self.thermal_gun.get()*15
+        self.total_medical_price = float(self.m_m_p+self.m_h_g_p+self.m_d_p+self.m_n_p+self.m_t_g_p+self.m_s_p)
 
-        self.medical_price.set("Rs. " + str(self.total_medical_price))
+        self.medical_price.set('Rs. ' + str(self.total_medical_price))
+        self.c_tax = round((self.total_medical_price * 0.05), 2)
+        self.medical_tax.set('Rs ' + str(self.c_tax))
 
-        self.total_grocery_price = (self.rice.get() * 40 +
-                                    self.food_oil.get() * 120 +
-                                    self.daal.get() * 60 +
-                                    self.wheat.get() * 30 +
-                                    self.fluor.get() * 20 +
-                                    self.maggi.get() * 12)
+        self.g_r_p = self.rice.get()*10
+        self.g_f_o_p = self.food_oil.get()*10
+        self.g_d_p = self.daal.get()*6
+        self.g_w_p = self.wheat.get()*10
+        self.g_f_p = self.flour.get()*8
+        self.g_m_p = self.maggi.get()*5
+        self.total_grocery_price = float(self.g_r_p+self.g_f_o_p+self.g_d_p+self.g_w_p+self.g_f_p+self.g_m_p)
 
-        self.grocery_price.set("Rs. " + str(self.total_grocery_price))
+        self.grocery_price.set('Rs. ' + str(self.total_grocery_price))
+        self.c_tax = round((self.total_grocery_price * 0.05), 2)
+        self.grocery_tax.set('Rs ' + str(self.c_tax))
 
-        self.total_cold_drink_price = (self.sprite.get() * 50 +
-                                    self.coke.get() * 40 +
-                                    self.limka.get() * 30 +
-                                    self.mazza.get() * 120 +
-                                    self.fanta.get() * 20 +
-                                    self.mountain_duo.get() * 150)
+        self.c_d_s_p = self.sprite.get()*10
+        self.c_d_l_p = self.limka.get()*10
+        self.c_d_c_p = self.coke.get()*15
+        self.c_d_m_p = self.mazza.get()*10
+        self.c_d_f_p = self.fanta.get()*15
+        self.c_d_m_d_p = self.mountain_duo.get()*10
+        self.total_cold_drink_price = float(self.c_d_s_p+self.c_d_l_p+self.c_d_c_p+self.c_d_m_p+self.c_d_f_p+self.c_d_m_d_p)
 
-        self.cold_drink_price.set("Rs. " + str(self.total_cold_drink_price))
+        self.cold_drink_price.set('Rs. ' + str(self.total_cold_drink_price))
+        self.c_tax = round((self.total_cold_drink_price * 0.05), 2)
+        self.cold_drink_tax.set('Rs ' + str(self.c_tax))
 
-        self.total_bill = self.total_medical_price + self.total_grocery_price + self.total_cold_drink_price
+        self.Total_bill = float(self.total_medical_price+self.total_grocery_price+self.total_cold_drink_price+self.c_tax)
 
+        # ============= Welcome Bill ==============
+    def welcome_bill(self):
+        self.txtarea.delete('1.0', END)
+        self.txtarea.insert(END, '\tWelcome Webcode Retail\n')
+        self.txtarea.insert(END, '\n')
+        self.txtarea.insert(END, f'\n Bill Number : {self.bill_no.get()}')
+        self.txtarea.insert(END, f'\n Customer Name : {self.c_name.get()}')
+        self.txtarea.insert(END, f'\n Phone Number : {self.c_phone.get()}')
+        self.txtarea.insert(END, f'\n =====================================')
+        self.txtarea.insert(END, f'\n Products\t\tQTY\t\tPrice')
+        self.txtarea.insert(END, f'\n =====================================')
 
+        # ============= Bill Area ==============
+    def bill_area(self):
+        if self.c_name.get() == "" or self.c_phone.get() == "":
+            messagebox.showerror("Error", "Customer details are must")
+        elif self.medical_price.get() == "Rs. 0.0" and self.grocery_price.get() == "Rs. 0.0" and self.cold_drink_price.get() == "Rs. 0.0":
+            messagebox.showerror("Error", "No Product Purchased")
+        else:
+            self.welcome_bill()
+            # ============= Medical ==============
+            if self.sanitizer.get() != 0:
+                self.txtarea.insert(END, f'\n Sanitizer\t\t{self.sanitizer.get()}\t\t{self.m_s_p}')
+            if self.mask.get() != 0:
+                self.txtarea.insert(END, f'\n Mask\t\t{self.mask.get()}\t\t{self.m_m_p}')
+            if self.hand_gloves.get() != 0:
+                self.txtarea.insert(END, f'\n Hand Gloves\t\t{self.hand_gloves.get()}\t\t{self.m_h_g_p}')
+            if self.dettol.get() != 0:
+                self.txtarea.insert(END, f'\n Dettol\t\t{self.dettol.get()}\t\t{self.m_d_p}')
+            if self.newsprin.get() != 0:
+                self.txtarea.insert(END, f'\n Newsprin\t\t{self.newsprin.get()}\t\t{self.m_n_p}')
+            if self.thermal.get() != 0:
+                self.txtarea.insert(END, f'\n Thermal Gun\t\t{self.thermal.get()}\t\t{self.m_t_g_p}')
 
+            # ============= Grocery ==============
+            if self.rice.get() != 0:
+                self.txtarea.insert(END, f'\n Rice\t\t{self.rice.get()}\t\t{self.g_r_p}')
+            if self.food_oil.get() != 0:
+                self.txtarea.insert(END, f'\n Food Oil\t\t{self.food_oil.get()}\t\t{self.g_f_o_p}')
+            if self.daal.get() != 0:
+                self.txtarea.insert(END, f'\n Daal\t\t{self.daal.get()}\t\t{self.g_d_p}')
+            if self.wheat.get() != 0:
+                self.txtarea.insert(END, f'\n Wheat\t\t{self.wheat.get()}\t\t{self.g_w_p}')
+            if self.flour.get() != 0:
+                self.txtarea.insert(END, f'\n Flour\t\t{self.flour.get()}\t\t{self.g_f_p}')
+            if self.maggi.get() != 0:
+                self.txtarea.insert(END, f'\n Maggi\t\t{self.maggi.get()}\t\t{self.g_m_p}')
 
+            # ============= Cold Drinks ==============
+            if self.sprite.get() != 0:
+                self.txtarea.insert(END, f'\n Sprite\t\t{self.sprite.get()}\t\t{self.c_d_s_p}')
+            if self.limka.get() != 0:
+                self.txtarea.insert(END, f'\n Limka\t\t{self.limka.get()}\t\t{self.c_d_l_p}')
+            if self.coke.get() != 0:
+                self.txtarea.insert(END, f'\n Coke\t\t{self.coke.get()}\t\t{self.c_d_c_p}')
+            if self.mazza.get() != 0:
+                self.txtarea.insert(END, f'\n Mazza\t\t{self.mazza.get()}\t\t{self.c_d_m_p}')
+            if self.fanta.get() != 0:
+                self.txtarea.insert(END, f'\n Fanta\t\t{self.fanta.get()}\t\t{self.c_d_f_p}')
+            if self.mountain_duo.get() != 0:
+                self.txtarea.insert(END, f'\n Mountain Dew\t\t{self.mountain_duo.get()}\t\t{self.c_d_m_d_p}')
 
+            # ============ Taxes ==============
+            if self.medical_tax.get() != '0.0':
+                self.txtarea.insert(END, f'\n -------------------------------------')
+                self.txtarea.insert(END, f'\n Medical Tax\t\t\t\t{self.medical_tax.get()}')
+            if self.grocery_tax.get() != '0.0':
+                self.txtarea.insert(END, f'\n Grocery Tax\t\t\t\t{self.grocery_tax.get()}')
+            if self.cold_drink_tax.get() != '0.0':
+                self.txtarea.insert(END, f'\n Cold Drink Tax\t\t\t\t{self.cold_drink_tax.get()}')
 
+            self.txtarea.insert(END, f'\n Total Bill : \t\t\t Rs. {self.Total_bill}')
+            self.txtarea.insert(END, f'\n -------------------------------------')
+            self.save_bill()
 
+            # ============ Save Bill =============
+    def save_bill(self):
+        op = messagebox.askyesno("Save Bill", "Do you want to save the Bill?")
+        if op > 0:
+            self.bill_data = self.txtarea.get('1.0', END)
+            f1 = open("bills/" + str(self.bill_no.get()) + ".txt", "w")
+            f1.write(self.bill_data)
+            f1.close()
+            messagebox.showinfo("Saved", f"Bill No. : {self.bill_no.get()} Saved Successfully")
+        else:
+            return
 
+        # ============ Find Bill =============
+    def find_bill(self):
+        present = "no"
+        for i in os.listdir("bills/"):
+            if i.split('.')[0] == self.search_bill.get():
+                f1 = open(f"bills/{i}", "r")
+                self.txtarea.delete('1.0', END)
+                for d in f1:
+                    self.txtarea.insert(END, d)
+                f1.close()
+                present = "yes"
+        if present == "no":
+            messagebox.showerror("Error", "Invalid Bill No.")
 
+        # ============ Clear Data =============
+    def clear_data(self):
+        op = messagebox.askyesno("Clear", "Do you really want to clear the data?")
+        if op > 0:
+            # ============ Medical ==============
+            self.sanitizer.set(0)
+            self.mask.set(0)
+            self.hand_gloves.set(0)
+            self.dettol.set(0)
+            self.newsprin.set(0)
+            self.thermal.set(0)
 
+            # ============ Grocery ==============
+            self.rice.set(0)
+            self.food_oil.set(0)
+            self.daal.set(0)
+            self.wheat.set(0)
+            self.flour.set(0)
+            self.maggi.set(0)
 
+            # ============ Cold Drinks ==============
+            self.sprite.set(0)
+            self.coke.set(0)
+            self.limka.set(0)
+            self.mazza.set(0)
+            self.fanta.set(0)
+            self.mountain_duo.set(0)
 
+            # ============ Total Product Price & Tax Variables ==============
+            self.medical_price.set("")
+            self.grocery_price.set("")
+            self.cold_drink_price.set("")
 
+            # ============ Customer ==============
+            self.c_name.set("")
+            self.c_phone.set("")
+            self.bill_no.set("")
+            x = random.randint(1000, 9999)
+            self.bill_no.set(str(x))
+            self.search_bill.set("")
 
+            self.welcome_bill()
 
+        # ============ Exit App =============
+    def exit_app(self):
+        op = messagebox.askyesno("Exit", "Do you really want to exit?")
+        if op > 0:
+            self.root.destroy()
 
-
-
-
-
+root = Tk()
+obj = Bill_App(root)
+root.mainloop()
+        

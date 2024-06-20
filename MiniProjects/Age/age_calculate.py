@@ -20,13 +20,24 @@ name = input('Write your name:\n')
 age = int(input('Write your age:\n'))
 localtime = time.localtime(time.time())
 
-year = localtime.tm_year - age
-month = localtime.tm_mon
-day = localtime.tm_mday
+year = age
+month = year * 12 + localtime.tm_mon
+day = 0
 
-leap_year = judge_leap_year(year)
-days = 0
-for i in range(1, month):
-    days += month_days(i, leap_year)
-days += day
-print(f'{name}, you were born on the {days} day of the year {year}.')
+begin_year = int(localtime.tm_year) - year
+end_year = begin_year + year
+
+for i in range(begin_year, end_year):
+    if judge_leap_year(i):
+        day += 366
+    else:
+        day += 365
+
+leap_year = judge_leap_year(localtime.tm_year)
+for i in range(1, localtime.tm_mon):
+    day += month_days(i, leap_year)
+
+day += localtime.tm_mday
+
+print("%s's age is %d years or " % (name, year), end="")
+print("%d months or %d days" % (month, day))

@@ -17,8 +17,6 @@ python converter.py
 
 2. The converted files will be saved in the `json` folder.
 
-5. The script will print the names of the converted files.
-
 ## Requirements
 
 - Python 3.x

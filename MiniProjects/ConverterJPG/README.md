@@ -1,4 +1,6 @@
-## Convert a json file into csv
+# Convert a json file into csv
+
+## Input Parameters
 
 This script take a json file as an input and generate a csv file in output
 
@@ -48,7 +50,7 @@ The function does not return any value. It converts the JSON file to a CSV file 
 
 - The CSV file must be readable by common spreadsheet software.
 
-# How to run the script
+## How to run the script
 
 To run the script, you need to provide the path to the input JSON file and the path to the output CSV file. The script will read the JSON file, convert it to a CSV file, and save it in the specified location.
 
@@ -60,11 +62,9 @@ python convert_json_to_csv.py input.json output.csv
 
 ```
 
-# Example
+## Example
 
 If the input JSON file `data.json` contains the following data:
-
-```
 
 [
   {
@@ -84,8 +84,6 @@ If the input JSON file `data.json` contains the following data:
   }
 ]
 
-```
-
 After running the script with the following command:
 
 ```bash
@@ -96,8 +94,6 @@ python convert_json_to_csv.py data.json output.csv
 
 The output CSV file `output.csv` will contain the following data:
 
-```
-
 name,age,city
 
 Alice,25,New York
@@ -106,11 +102,9 @@ Bob,30,Los Angeles
 
 Charlie,35,Chicago
 
-```
-
 The script will not print any output to the console.
 
-# Requirements
+## Requirements
 
 - Python 3.x
 

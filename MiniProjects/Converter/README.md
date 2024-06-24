@@ -14,9 +14,9 @@ python converter.py
 
 1. The script will convert all the JPEG images in the `images` folder to PNG images.
 
-4. The converted images will be saved in the `output` folder.
+2. The converted images will be saved in the `output` folder.
 
-5. The script will print the names of the converted images.
+3. The script will print the names of the converted images.
 
 ## Requirements
 
@@ -34,21 +34,15 @@ pip install Pillow
 
 If the `images` folder contains the following JPEG images:
 
-```
-
 image1.jpg
 image2.jpg
 image3.jpg
-```
 
 After running the script, the `output` folder will contain the following PNG images:
-
-```
 
 image1.png
 image2.png
 image3.png
-```
 
 The script will print the following output:
 

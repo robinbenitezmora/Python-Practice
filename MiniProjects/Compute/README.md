@@ -6,30 +6,22 @@ Given two rectangles, determine the area of their intersection. If the rectangle
 
 For example, given the following rectangles:
 
-```
-
 {
   "top_left": (1, 4),
   "dimensions": (3, 3) # width, height
 }
-```
 
 and
 
-```
-
-{
-  "top_left": (0, 5),
-  "dimensions" (4, 3) # width, height
-}
-```
-
 {
   "top_left": (0, 5),
   "dimensions" (4, 3) # width, height
 }
 
-```
+{
+  "top_left": (0, 5),
+  "dimensions" (4, 3) # width, height
+}
 
 return 6.
 

@@ -5,8 +5,8 @@ How to play desktop notifier game:
 3. The game ends after displaying the notification
 '''
 
-import requests
-from plyer import notification
+import requests # type: ignore
+from plyer import notification # type: ignore
 
 def get_quote():
     url = 'https://api.quotable.io/random'

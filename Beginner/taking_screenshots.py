@@ -5,7 +5,7 @@ How to play taking screenshots game:
 3. The game ends after taking the specified number of screenshots
 '''
 
-import pyautogui
+import pyautogui # type: ignore
 import time
 
 def take_screenshots(num_screenshots):

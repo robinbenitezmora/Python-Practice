@@ -8,9 +8,9 @@ Aproach:
 6. Pass the result to the notification object.
 '''
 
-import requests
-from bs4 import BeautifulSoup
-from win10toast import ToastNotifier
+import requests # type: ignore
+from bs4 import BeautifulSoup # type: ignore
+from win10toast import ToastNotifier # type: ignore
 
 n = ToastNotifier()
 

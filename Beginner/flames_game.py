@@ -1,3 +1,7 @@
+'''
+Take two names as input then remove the common characters with their respective common occurrences. For removing purpose we create a user-defined remove_match_char function with two arguments as list1 and list2 which stores list of characters of two players name respectively and return list of concatenated list(list1 + “*” flagst2) and flag value which we store in ret_list variable.After removing all the common characters, count the total no. of remaining characters then create a result list with FLAMES acronym i.e [“Friends”, “Love”, “Affection”, “Marriage”, “Enemy”, “Siblings”]. Now start removing word one by one until list does not contain only one word, using the total count which we got. the word which remains in the last, is the result.
+'''
+
 def remove_match_char(list1, list2):
     for i in range(len(list1)):
         for j in range(len(list2)):

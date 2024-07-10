@@ -1,8 +1,7 @@
 import random
 from game_data import data
-from art import *
+from art import logo
 from replit import clear
-from google.colab import output
 
 def assign():
     return random.choice(data)
@@ -17,6 +16,7 @@ def play_higher_lower():
         while account_a == account_b:
             account_b = assign()
         print(f"Compare A: {account_a['name']}, a {account_a['description']}, from {account_a['country']}.")
+        vs = "VS" # Define the variable 'vs'
         print(vs)
         print(f"Against B: {account_b['name']}, a {account_b['description']}, from {account_b['country']}.")
         guess = input('Who has more followers? Type "A" or "B": ').lower()

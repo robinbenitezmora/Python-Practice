@@ -1,3 +1,7 @@
 {
- "CodeGPT.apiKey": "CodeGPT Plus Beta"
+  "CodeGPT.apiKey": "CodeGPT Plus Beta",
+  "python.analysis.extraPaths": [
+    "./MiniProjects/ASCII/make_",
+    "./MiniProjects/ASCII/make_"
+  ]
 }

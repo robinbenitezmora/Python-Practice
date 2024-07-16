@@ -1,3 +1,23 @@
+logo = """
+  _    _ _       _                 _                            
+ | |  | (_)     | |               | |                           
+ | |__| |_  __ _| |__   ___ _ __  | |     _____      _____ _ __ 
+ |  __  | |/ _` | '_ \ / _ \ '__| | |    / _ \ \ /\ / / _ \ '__|
+ | |  | | | (_| | | | |  __/ |    | |___| (_) \ V  V /  __/ |   
+ |_|  |_|_|\__, |_| |_|\___|_|    |______\___/ \_/\_/ \___|_|   
+            __/ |                                               
+           |___/                                                
+"""
+ 
+ 
+vs = """
+ _    __    
+| |  / /____
+| | / / ___/
+| |/ (__  ) 
+|___/____(_)
+"""
+
 data = [
     {
         'name': 'Instagram',
@@ -129,13 +149,63 @@ def compare(p1, p2, user_input):
     sum2 = p2['follower_count']
 
     max = ''
+
     if sum1 > sum2:
         max = p1['name']
     elif sum1 < sum2:
         max = p2['name']
 
-    if user_input == max:
+    if max == user_input:
         return True
     else:
         return False
     
+    def play_higher_lower():
+        playing_game = True
+
+        while playing_game:
+            clear()
+            print(logo)
+
+            score = 0
+
+            person1 = assign()
+            person2 = assign()
+
+            if score > 0:
+                person1 = person2
+                person2 = assign()
+
+                if person1 == person2:
+                    person2 = assign()
+
+            print(f'Name: {person1['name']}, Description: {person1['description']})')
+            print(vs)
+
+            print(f'Name: {person2['name']}, Description: {person2['description']})')
+
+            print('---------------------------------------------------')
+            print('Your current score is: ' + str(score))
+            print('---------------------------------------------------')
+
+            guess = input(f'Enter name of person with Higher Followers: ')
+
+            if compare(person1, person2, guess):
+                score += 1
+            else
+                still_guessing = False
+
+        play_again = input('Do you want to play again? (yes/no): ').lower()
+
+        if play_again == 'yes':
+            continue
+        elif play_again == 'no':
+            playing_game = False
+            clear()
+            print('Thanks for playing!')
+        else:
+            print('Invalid Input')
+            playing_game = False
+            clear()
+            print('Thanks for playing!')
+            

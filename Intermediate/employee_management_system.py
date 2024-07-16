@@ -191,7 +191,7 @@ def compare(p1, p2, user_input):
 
             if compare(person1, person2, guess):
                 score += 1
-            else
+            else:
                 still_guessing = False
 
         play_again = input('Do you want to play again? (yes/no): ').lower()

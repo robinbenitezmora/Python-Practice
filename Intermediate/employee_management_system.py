@@ -136,10 +136,9 @@ data = [
 ]
 
 import random
-from game_data import data
+from Beginner.higher_lower import play_higher_lower
 from art import logo, vs
 from replit import clear
-from google.colab import output
 
 def assign():
     return random.choice(data)
@@ -197,15 +196,10 @@ def compare(p1, p2, user_input):
 
         play_again = input('Do you want to play again? (yes/no): ').lower()
 
-        if play_again == 'yes':
-            continue
-        elif play_again == 'no':
+        if play_again == 'no':
             playing_game = False
-            clear()
             print('Thanks for playing!')
         else:
-            print('Invalid Input')
-            playing_game = False
-            clear()
-            print('Thanks for playing!')
-            
+            playing_game = True
+
+play_higher_lower()

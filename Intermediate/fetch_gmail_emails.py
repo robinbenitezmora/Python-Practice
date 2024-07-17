@@ -27,7 +27,7 @@ con.select('Inbox')
 
 msg = get_emails(search('FROM', 'SENDER_EMAIL_ADDRESS', con))
 
-for msg in msgs[::-1]:
+for msgs in msg[::-1]:
     for sent in msg:
         if type(sent) is tuple:
             content = str(sent[1], 'utf-8')

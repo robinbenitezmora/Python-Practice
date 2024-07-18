@@ -243,11 +243,11 @@ def game_step():
 
     # If game round is over
     if playing == False:
-        print ' --- for a total of: ' + str(dealer_hand.calc_val())
-        print 'Chip Total: ' + str(chip_pool)
+        print(' --- for a total of: ' + str(dealer_hand.calc_val()))
+        print('Chip Total: ' + str(chip_pool))
     # Otherwise, don't know the second card yet
     else:
-        print ' with another card hidden upside down'
+        print(' with another card hidden upside down')
 
     # Print result of hit or stand.
     print(result)

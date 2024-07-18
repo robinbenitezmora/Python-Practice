@@ -1,5 +1,5 @@
 from flask import Flask, request
-from twilio.twiml.messaging_response import MessagingResponse
+from twilio.twiml.messaging_response import MessagingResponse # type: ignore
 import requests
 import json
 

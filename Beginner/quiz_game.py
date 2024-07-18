@@ -40,4 +40,3 @@ else:
 print('You got ' + str(score) + ' questions correct!')
 
 print('Thanks for playing!')
-

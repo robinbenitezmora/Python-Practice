@@ -9,7 +9,7 @@ def start_requests(self):
         url='https://www.geeksforgeeks.org/',
         wait_time=3,
         screenshot=True,
-        callback=self.parse
+        callback=self.parse,
         dont_filter=True
     )
 

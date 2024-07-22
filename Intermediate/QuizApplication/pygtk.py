@@ -344,6 +344,7 @@ if __name__ == '__main__':
         else:
             report += 'You would revisit the restaurant.\n'
 
+        sli = Slider(0, 0, 0, 0, 0, 0)  # Replace the values with appropriate values for the Slider
         textarea.appendText(report + '\n' + ' Slider value: ' + str(sli.getValue()) + '\n')
 
         return True

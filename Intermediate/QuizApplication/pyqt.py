@@ -306,7 +306,7 @@ class RadioGroup(object):
 class ValueList(object):
     controller = None
 
-    def __init__(self, value='', choices, X, Y, width, height):
+    def __init__(self, choices, X, Y, width, height, value=''):
         self.values = value
         self.choices = choices
         self.positionX = X
@@ -324,23 +324,23 @@ if __name__ == '__main__':
     global i, j
 
     def SubmitButtonClick(event = None):
-        if valuelist.getValue() == 'Maths':
-            textarea.setText('')
+        if ValueList.getValue() == 'Maths':
+            TextArea.setText('')
             global i
             i = 1
             global j
             j = 0
 
-            textarea.setText('You are taking a Maths quiz\n')
+            TextArea.setText('You are taking a Maths quiz\n')
 
-        if valuelist.getValue() == 'General Knowledge':
-            textarea.setText('')
+        if ValueList.getValue() == 'General Knowledge':
+            TextArea.setText('')
             global i
             i = 2
             global j
             j = 0
 
-            textarea.setText('You are taking a General Knowledge quiz\n')
+            TextArea.setText('You are taking a General Knowledge quiz\n')
 
         return True
     

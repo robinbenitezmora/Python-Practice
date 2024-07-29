@@ -1,6 +1,5 @@
 import os
 import sys
-from PyQt4 import QtGui, QtCore
 from functools import partial
 
 class SurveyWindow(QtGui.Qwidget):

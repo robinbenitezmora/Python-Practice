@@ -19,11 +19,12 @@ def main():
         while len(guess) != NUM_DIGITS or not guess.isdecimal():
             print('Guess #{}: '.format(MAX_GUESSES))
             guess = input('> ')
-
+    
+            secretNum = getSecretNum()  # Define secretNum before using it
             clues = getClues(guess, secretNum)
             print(clues)
             numGuesses += 1
-
+    
             if guess == secretNum:
                 break
             if numGuesses > MAX_GUESSES:

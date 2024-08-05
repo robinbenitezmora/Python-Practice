@@ -26,7 +26,7 @@ while True:
     if rightWidth > 20:
         rightWidth = 20
 
-    print(('=' * leftWidth) + (' ' * (WIDTH - leftWidth - rightWidth)) + ('=' * rightWidth)
+    print(('=' * leftWidth) + (' ' * (WIDTH - leftWidth - rightWidth)) + ('=' * rightWidth))
     time.sleep(PAUSE_AMOUNT)
 
     if leftWidth == 10 and rightWidth == 20:

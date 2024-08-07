@@ -72,29 +72,114 @@ try:
     rowIndex = 0
 
     while True:
-        rowIndex += 1
-        if rowIndex == len(ROWS):
-            rowIndex = 0
+        for laneNum, ducklingObj in enumerate(ducklingLanes):
+            if (ducklingObj == None) or (random.random() > DENSITY):
+                ducklingObj = Duckling()
+                ducklingLanes[laneNum] = ducklingObj
 
-        if rowIndex == 0 or rowIndex == 9:
-            print(ROWS[rowIndex])
-            continue
-
-        randomSelection = random.randint(1, 4)
-        if randomSelection == 1:
-            print(ROWS[rowIndex].format('A', 'T'))
-        elif randomSelection == 2:
-            print(ROWS[rowIndex].format('T', 'A'))
-        elif randomSelection == 3:
-            print(ROWS[rowIndex].format('C', 'G'))
-        elif randomSelection == 4:
-            print(ROWS[rowIndex].format('G', 'C'))
-
-        leftNucleoitide = 'A'
-        rightNucleoitide = 'T'
-        print(ROWS[rowIndex].format(leftNucleoitide, rightNucleoitide))
+            if ducklingObj != None:
+                print(ducklingObj.getLaneStr(laneNum), end='')
+                if ducklingObj.partToDisplayNext == None:
+                    ducklingLanes[laneNum] = None
+            else:
+                print(' ' * DUCKLING_WIDTH, end='')
+        print()
+        sys.stdout.flush()
         time.sleep(PAUSE)
-except KeyboardInterrupt:
-    print('DNA Animation, stopped.')
-    sys.exit()
-# The Duckling Animation program is a simple program that displays a duckling animation. The program uses the shutil module to get the width of the terminal window. The program then prints the duckling animation to the terminal window and updates the animation every 0.15 seconds. The user can press Ctrl-C to quit the program.
+
+class Duckling:
+    def __init__(self):
+        self.direction = random.choice([LEFT, RIGHT])
+        self.body = random.choice([CHUBBY, VERY_CHUBBY])
+        self.mouth = random.choice([OPEN, CLOSED])
+        self.wing = random.choice([OUT, UP, DOWN])
+
+        if self.body == CHUBBY:
+            self.eyes = BEADY
+        else:
+            self.eyes = random.choice([BEADY, WIDE, HAPPY, ALOOF])
+
+        self.partToDisplayNext = HEAD
+
+    def getHeadStr(self):
+        headStr = ''
+        if self.direction == LEFT:
+            if self.mouth == OPEN:
+                headStr += '>'
+            elif self.mouth == CLOSED:
+                headStr += '='
+            if self.eyes == BEADY and self.body == CHUBBY:
+                headStr += '"'
+            elif self.eyes == BEADY and self.body == VERY_CHUBBY:
+                headStr += "''"
+            elif self.eyes == HAPPY:
+                headStr += '^^'
+            elif self.eyes == ALOOF:
+                headStr += '``'
+            headStr += ') '
+
+        if self.direction == RIGHT:
+            headStr += ' ('
+            if self.eyes == BEADY and self.body == CHUBBY:
+                headStr += '"'
+            elif self.eyes == BEADY and self.body == VERY_CHUBBY:
+                headStr += "''"
+            elif self.eyes == HAPPY:
+                headStr += '^^'
+            elif self.eyes == ALOOF:
+                headStr += '``'
+            if self.mouth == OPEN:
+                headStr += '<'
+            elif self.mouth == CLOSED:
+                headStr += '='
+
+        if self.body == CHUBBY:
+            headStr += ' '
+
+        return headStr
+    
+    def getBodyStr(self):
+        bodyStr = ' ('
+        if self.direction == LEFT:
+            if self.body == CHUBBY:
+                bodyStr += ' '
+            elif self.body == VERY_CHUBBY:
+                bodyStr += '  '
+
+            if self.wing == OUT:
+                bodyStr += '>'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == DOWN:
+
+        if self.direction == RIGHT:
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+
+            if self.body == CHUBBY:
+                bodyStr += ' '
+            elif self.body == VERY_CHUBBY:
+                bodyStr += '  '
+
+        if self.body == CHUBBY:
+            bodyStr += ' '
+        return bodyStr
+    
+    def getFeetStr(self):
+        if self.body == CHUBBY:
+            return '  " "'
+        elif self.body == VERY_CHUBBY:
+            return ' " " '
+        
+    def getNextBodyPart(self):
+        if self.partToDisplayNext == HEAD:
+            self.partToDisplayNext = BODY
+        elif self.partToDisplayNext == BODY:
+            self.partToDisplayNext = FEET
+        elif self.partToDisplayNext == FEET:
+            self.partToDisplayNext = None
+ 

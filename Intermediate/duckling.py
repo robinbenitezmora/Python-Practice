@@ -64,29 +64,6 @@ DUCKLING = {
         }
     }
 }
-
-try:
-    print('Duckling Animation, press Ctrl-C to quit...')
-    print('Press Ctrl-C to quit.')
-    time.sleep(2)
-    rowIndex = 0
-
-    while True:
-        for laneNum, ducklingObj in enumerate(ducklingLanes):
-            if (ducklingObj == None) or (random.random() > DENSITY):
-                ducklingObj = Duckling()
-                ducklingLanes[laneNum] = ducklingObj
-
-            if ducklingObj != None:
-                print(ducklingObj.getLaneStr(laneNum), end='')
-                if ducklingObj.partToDisplayNext == None:
-                    ducklingLanes[laneNum] = None
-            else:
-                print(' ' * DUCKLING_WIDTH, end='')
-        print()
-        sys.stdout.flush()
-        time.sleep(PAUSE)
-
 class Duckling:
     def __init__(self):
         self.direction = random.choice([LEFT, RIGHT])
@@ -119,6 +96,84 @@ class Duckling:
             headStr += ') '
 
         if self.direction == RIGHT:
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
+            if self.wing == DOWN:
+                bodyStr += 'v'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == OUT:
+                bodyStr += '<'
             headStr += ' ('
             if self.eyes == BEADY and self.body == CHUBBY:
                 headStr += '"'
@@ -151,35 +206,87 @@ class Duckling:
             elif self.wing == UP:
                 bodyStr += '^'
             elif self.wing == DOWN:
-
-        if self.direction == RIGHT:
-            if self.wing == DOWN:
                 bodyStr += 'v'
-            elif self.wing == UP:
-                bodyStr += '^'
-            elif self.wing == OUT:
-                bodyStr += '<'
 
             if self.body == CHUBBY:
                 bodyStr += ' '
             elif self.body == VERY_CHUBBY:
                 bodyStr += '  '
 
-        if self.body == CHUBBY:
-            bodyStr += ' '
+        if self.direction == RIGHT:
+            if self.body == CHUBBY:
+                bodyStr += ' '
+            elif self.body == VERY_CHUBBY:
+                bodyStr += '  '
+
+            if self.wing == OUT:
+                bodyStr += '<'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == DOWN:
+                bodyStr += 'v'
+
+            if self.body == CHUBBY:
+                bodyStr += ' '
+            elif self.body == VERY_CHUBBY:
+                bodyStr += '  '
+
         return bodyStr
     
     def getFeetStr(self):
-        if self.body == CHUBBY:
-            return '  " "'
-        elif self.body == VERY_CHUBBY:
-            return ' " " '
-        
-    def getNextBodyPart(self):
+        feetStr = '  '
+        if self.direction == LEFT:
+            if self.wing == OUT:
+                feetStr += '>'
+            elif self.wing == UP:
+                feetStr += '^'
+            elif self.wing == DOWN:
+                feetStr += 'v'
+
+        if self.direction == RIGHT:
+            if self.wing == OUT:
+                feetStr += '<'
+            elif self.wing == UP:
+                feetStr += '^'
+            elif self.wing == DOWN:
+                feetStr += 'v'
+
+        feetStr += '  '
+        return feetStr
+    
+    def getLaneStr(self, laneNum):
         if self.partToDisplayNext == HEAD:
             self.partToDisplayNext = BODY
+            return self.getHeadStr()
         elif self.partToDisplayNext == BODY:
             self.partToDisplayNext = FEET
+            return self.getBodyStr()
         elif self.partToDisplayNext == FEET:
             self.partToDisplayNext = None
- 
+            return self.getFeetStr()
+        else:
+            return ' ' * DUCKLING_WIDTH
+
+print('Duckling Animation, press Ctrl-C to quit...')
+print('Press Ctrl-C to quit.')
+time.sleep(2)
+rowIndex = 0
+
+ducklingLanes = [None] * WIDTH  # Define the ducklingLanes variable
+
+while True:
+    for laneNum, ducklingObj in enumerate(ducklingLanes):
+        if (ducklingObj == None) or (random.random() > DENSITY):
+            ducklingObj = Duckling()
+            ducklingLanes[laneNum] = ducklingObj
+
+        if ducklingObj != None:
+            print(ducklingObj.getLaneStr(laneNum), end='')
+            if ducklingObj.partToDisplayNext == None:
+                ducklingLanes[laneNum] = None
+        else:
+            print(' ' * DUCKLING_WIDTH, end='')
+    print()
+    sys.stdout.flush()
+    time.sleep(PAUSE)
+        

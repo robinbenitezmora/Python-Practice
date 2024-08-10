@@ -1,7 +1,11 @@
 import random, sys, time
 
 try:
-    import bext
+    try:
+        import bext
+    except ImportError:
+        print('This program requires the bext module, which you can install by running: pip install bext')
+        sys.exit()
 except ImportError:
     print('This program requires the bext module, which you can install by running: pip install bext')
     sys.exit()

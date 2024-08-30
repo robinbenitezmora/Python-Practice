@@ -100,7 +100,7 @@ def displayAbacus (abacusNumber):
     abacusChar = []
 
     for i, beadPresent in enumerate(hasBead):
-        if i beadPresent:
+        if beadPresent:
             abacusChar.append('O')
         else:
             abacusChar.append('|')
